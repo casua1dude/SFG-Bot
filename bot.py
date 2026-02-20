@@ -42,15 +42,15 @@ async def ban(ctx, member: discord.Member, *, reason="No reason provided"):
     except:
         await ctx.send("I can't ban this user.")
 
-# Mute (Timeout)
 @bot.command()
 @commands.has_permissions(moderate_members=True)
-async def mute(ctx, member: discord.Member, minutes: int):
+async def mute(ctx, member: discord.Member, minutes: int = 5):
     try:
         await member.timeout(timedelta(minutes=minutes))
         await ctx.send(f"{member} muted for {minutes} minutes.")
-    except:
+    except Exception as e:
         await ctx.send("I can't mute this user.")
+        print(e)
 # ----------------------------
 # CONFIG
 # ----------------------------
